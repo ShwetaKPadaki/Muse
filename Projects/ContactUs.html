@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>indexJavaScript.html</title>
+  
+    <link rel="stylesheet" type="text/css" href="formValidate.css"> 
+      <style>
+        
+body{
+    background-color: teal;
+}
+
+
+
+#FormValidate{
+    background-color: white; 
+    width: 30%;
+    text-align: center;
+    border: 10px solid darkolivegreen;
+    border-radius: 30px; 
+    box-shadow: 0 0 25px rgba(0,0,0,0);
+    height: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 5%;
+    padding: 30px;
+} 
+#fname,#lname,#phone, #exp{
+    width: 250px;
+    height: 25px;
+    background-color: lightgray;
+    border: lightgray;
+   
+}
+#msg{
+    width: 250px;
+    height: 100px;
+    background-color: lightgray;
+    border: lightgray;
+}
+
+#fname:focus,#lname:focus,#phone:focus, #exp:focus, msg:focus{
+    background: gray;
+
+}
+
+#submit{
+    width: 100px;
+    height: 50px;
+   background-color: lightgray;
+}
+
+#submit:hover{
+    background-color: gray;
+}
+
+label.error{
+    font-weight: 700;
+    display: block;
+    color: #f00;
+    font-size: 14px;
+
+}
+.Output{
+    
+    background-color:blueviolet;
+    display: inline-block;
+    background: #eee;
+   
+}
+
+      </style>
+   </head> 
+
+<body>
+   
+
+    <div>
+<form id="FormValidate" action="https://formsubmit.co/maggi.3107@gmail.com" method="POST">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="name" placeholder="Name*" required><br>
+  <label for="email">EmailId:</label><br>
+  <input type="text" id="email" name="email" placeholder="Email*" required><br>
+  <label for="phone">Phone:</label><br>
+  <input type="text" id="phone" name="phone" placeholder="phone*" required><br>
+    <label for="Message">Message:</label><br>
+  <input type="text" id="msg" name="msg" placeholder="msg*" required><br><br><br><br>
+  <input type="submit" id="submit" value="Submit">
+</form>
+</div>
+
+<script type="text/javascript" src="jquery-3.6.3.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script type="text/javascript" src="formValidate.js"></script> 
+
+<div>
+  <span class="Output">
+  </span>
+    </div>
+<script>
+    
+    $("#FormValidate").validate({
+    rules:{
+      name:{
+      required: true,
+      minlength: 3
+      },
+      email:{
+        email:true
+      },
+      phone:{
+        number:true,
+        minlength: 10,
+        maxlength: 10
+      }
+      },
+      messages: {
+        fname:{
+        required: "Please enter a proper name",
+        minlength: "Please, at least 3 characters are necessary"
+      },
+      email: "Please enter a valid mail id",
+      phone: "Please enter a valid phone no",
+      exp: "Please enter a valid work experience",
+      msg: "Please enter a valid note"
+    },
+
+    submitHandler: function(form) {
+      form.submit();
+    }
+});
+
+
+$(document).ready(function() {    
+$("#submit").click(function(){
+  const Sname = $("#fname").val();
+  const Semail = $("#email").val();
+  const Sphone = $("#phone").val();
+  const Expr  = $("#exp").val();
+  console.log(Sphone);
+ var Appendtext = "Student Name is" +Sname+ "and contact details are" +Semail+ "," +Sphone+ "and work experience is " +Expr+ "Next\n" 
+  console.log(Appendtext);
+  //$("#Output").text(Sname , Semail,  Sphone, Expr); 
+  $(".Output").append("&#13;&#10;" + Appendtext);
+  $("#fname").val("");
+  $("#email").val("");
+  $("#phone").val("");
+  $("#exp").val("");
+
+})
+});
+
+  
+</script>
+</body>
+</html>
